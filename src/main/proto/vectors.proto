@@ -5,6 +5,15 @@ package vectors;
 option java_package = "nl.kabisa.rpc.proto.base";
 option java_outer_classname = "VectorProto";
 
+service VectorService {
+    rpc GetVectors(VectorsRequest) returns (stream Vector) {}
+}
+
+message VectorsRequest {
+    int64 seed = 1;
+    int32 number_of_vectors = 2;
+}
+
 message Point {
     double x = 1;
     double y = 2;
