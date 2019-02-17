@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package vectors;
+
+option java_package = "nl.kabisa.rpc.protos";
+option java_outer_classname = "VectorProtos";
+
+message Point {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+}
+
+message Vector {
+    Point start = 1;
+    Point end = 2;
+}
+
+message Vectors {
+    repeated Vector vectors = 1;
+}
