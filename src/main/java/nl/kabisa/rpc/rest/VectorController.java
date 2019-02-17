@@ -3,8 +3,6 @@ package nl.kabisa.rpc.rest;
 import static nl.kabisa.rpc.proto.DomainToProto.toProto;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
 
 import nl.kabisa.rpc.VectorGenerator;
@@ -15,11 +13,6 @@ import nl.kabisa.rpc.proto.base.VectorProto;
 public class VectorController {
 
     private final VectorGenerator vectorGenerator;
-
-    @Bean
-    ProtobufHttpMessageConverter protobufHttpMessageConverter() {
-        return new ProtobufHttpMessageConverter();
-    }
 
     @Autowired
     public VectorController(VectorGenerator vectorGenerator) {
