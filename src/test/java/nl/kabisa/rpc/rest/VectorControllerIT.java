@@ -2,8 +2,8 @@ package nl.kabisa.rpc.rest;
 
 import static org.junit.Assert.assertEquals;
 
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -40,21 +40,22 @@ public class VectorControllerIT {
         var response = testRestTemplate.getForEntity("/json/vectors?seed={seed}&numberOfVectors={numberOfVectors}", String.class, 0, 1);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        JSONAssert.assertEquals(new JSONArray(
-                "["
-                + " {"
-                + "     \"start\": {"
-                + "         \"x\": 0.730967787376657,"
-                + "         \"y\": 0.24053641567148587,"
-                + "        \"z\": 0.6374174253501083"
-                + "     },"
-                + "     \"end\": {"
-                + "         \"x\": 0.5504370051176339,"
-                + "         \"y\": 0.5975452777972018,"
-                + "         \"z\": 0.3332183994766498"
-                + "     }"
-                + " }"
-                + "]"), new JSONArray(response.getBody()), true);
+        JSONAssert.assertEquals(new JSONObject("{"
+                                               + "  \"vectors\": ["
+                                               + "      {"
+                                               + "          \"start\": {"
+                                               + "              \"x\": 0.730967787376657,"
+                                               + "              \"y\": 0.24053641567148587,"
+                                               + "              \"z\": 0.6374174253501083"
+                                               + "          },"
+                                               + "          \"end\": {"
+                                               + "              \"x\": 0.5504370051176339,"
+                                               + "              \"y\": 0.5975452777972018,"
+                                               + "              \"z\": 0.3332183994766498"
+                                               + "          }"
+                                               + "      }"
+                                               + "  ]"
+                                               + "}"), new JSONObject(response.getBody()), true);
     }
 
     @Test
