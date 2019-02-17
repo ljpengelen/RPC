@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package vectors;
 
-option java_package = "nl.kabisa.rpc.protos";
-option java_outer_classname = "VectorProtos";
+option java_package = "nl.kabisa.rpc.proto.base";
+option java_outer_classname = "VectorProto";
 
 message Point {
     double x = 1;

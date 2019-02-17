@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import nl.kabisa.rpc.protos.VectorProtos;
+import nl.kabisa.rpc.proto.base.VectorProto;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -59,25 +59,25 @@ public class VectorControllerIT {
 
     @Test
     public void generates_proto_vectors() {
-        var response = testRestTemplate.getForEntity("/proto/vectors?seed={seed}&numberOfVectors={numberOfVectors}", VectorProtos.Vectors.class, 0, 1);
+        var response = testRestTemplate.getForEntity("/proto/vectors?seed={seed}&numberOfVectors={numberOfVectors}", VectorProto.Vectors.class, 0, 1);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
-        var start = VectorProtos.Point.newBuilder()
+        var start = VectorProto.Point.newBuilder()
                 .setX(0.730967787376657)
                 .setY(0.24053641567148587)
                 .setZ(0.6374174253501083)
                 .build();
-        var end = VectorProtos.Point.newBuilder()
+        var end = VectorProto.Point.newBuilder()
                 .setX(0.5504370051176339)
                 .setY(0.5975452777972018)
                 .setZ(0.3332183994766498)
                 .build();
-        var vector = VectorProtos.Vector.newBuilder()
+        var vector = VectorProto.Vector.newBuilder()
                 .setStart(start)
                 .setEnd(end)
                 .build();
-        var vectors = VectorProtos.Vectors.newBuilder()
+        var vectors = VectorProto.Vectors.newBuilder()
                 .addVectors(vector)
                 .build();
 

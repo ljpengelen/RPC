@@ -2,5 +2,5 @@
 *.iml
 .mvn/wrapper/*
 !.mvn/wrapper/maven-wrapper.properties
-src/main/java/nl/kabisa/rpc/protos
+src/gen
 target

@@ -69,6 +69,25 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/gen/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
@@ -87,7 +106,7 @@
                         </goals>
                         <configuration>
                             <includes>
-                                <include>nl/kabisa/rpc/protos/**</include>
+                                <include>nl/kabisa/rpc/proto/base/**</include>
                             </includes>
                         </configuration>
                     </execution>
@@ -103,7 +122,7 @@
                                 <arg>-Werror</arg>
                             </compilerArgs>
                             <excludes>
-                                <exclude>nl/kabisa/rpc/protos/**</exclude>
+                                <exclude>nl/kabisa/rpc/proto/base/**</exclude>
                             </excludes>
                             <showDeprecation>true</showDeprecation>
                             <showWarnings>true</showWarnings>
