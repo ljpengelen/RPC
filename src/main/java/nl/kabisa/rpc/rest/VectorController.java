@@ -1,5 +1,7 @@
 package nl.kabisa.rpc.rest;
 
+import static nl.kabisa.rpc.proto.DomainToProto.toProto;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,6 @@ import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
 
 import nl.kabisa.rpc.VectorGenerator;
-import nl.kabisa.rpc.models.Point;
 import nl.kabisa.rpc.models.Vector;
 import nl.kabisa.rpc.proto.base.VectorProto;
 
@@ -30,21 +31,6 @@ public class VectorController {
     @GetMapping("/json/vectors")
     public List<Vector> getJsonVectors(@RequestParam long seed, @RequestParam int numberOfVectors) {
         return vectorGenerator.generateRandomVectors(seed, numberOfVectors);
-    }
-
-    private VectorProto.Point toProto(Point point) {
-        return VectorProto.Point.newBuilder()
-                .setX(point.getX())
-                .setY(point.getY())
-                .setZ(point.getZ())
-                .build();
-    }
-
-    private VectorProto.Vector toProto(Vector vector) {
-        return VectorProto.Vector.newBuilder()
-                .setStart(toProto(vector.getStart()))
-                .setEnd(toProto(vector.getEnd()))
-                .build();
     }
 
     @GetMapping("/proto/vectors")
