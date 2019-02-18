@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
+import org.lognet.springboot.grpc.context.LocalRunningGrpcPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -23,7 +23,7 @@ public class VectorsServiceIT {
     private ManagedChannel managedChannel;
     private VectorServiceGrpc.VectorServiceBlockingStub blockingStub;
 
-    @Value("${grpc.port}")
+    @LocalRunningGrpcPort
     private int port;
 
     @Before
