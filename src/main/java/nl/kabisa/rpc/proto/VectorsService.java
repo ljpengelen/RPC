@@ -21,7 +21,13 @@ public class VectorsService extends VectorServiceGrpc.VectorServiceImplBase {
     }
 
     @Override
-    public void getVectors(VectorProto.VectorsRequest request, StreamObserver<VectorProto.Vector> responseObserver) {
+    public void getVectors(VectorProto.VectorsRequest request, StreamObserver<VectorProto.Vectors> responseObserver) {
+        responseObserver.onNext(toProto(vectorGenerator.generateRandomVectors(request.getSeed(), request.getNumberOfVectors())));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getVectorStream(VectorProto.VectorsRequest request, StreamObserver<VectorProto.Vector> responseObserver) {
         vectorGenerator.generateRandomVectors(request.getSeed(), request.getNumberOfVectors()).forEach(vector -> responseObserver.onNext(toProto(vector)));
         responseObserver.onCompleted();
     }

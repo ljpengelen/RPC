@@ -38,13 +38,30 @@ public class VectorsServiceIT {
     }
 
     @Test
-    public void returns_vectors() {
+    public void returns_list_of_vectors() {
         var vectorsRequest = VectorProto.VectorsRequest.newBuilder()
                 .setNumberOfVectors(1)
                 .setSeed(0)
                 .build();
 
         var response = blockingStub.getVectors(vectorsRequest);
+
+        assertEquals(1, response.getVectorsCount());
+
+        var vector = response.getVectors(0);
+        Point start = new Point(0.730967787376657, 0.24053641567148587, 0.6374174253501083);
+        Point end = new Point(0.5504370051176339, 0.5975452777972018, 0.3332183994766498);
+        assertEquals(toProto(new Vector(start, end)), vector);
+    }
+
+    @Test
+    public void returns_stream_of_vectors() {
+        var vectorsRequest = VectorProto.VectorsRequest.newBuilder()
+                .setNumberOfVectors(1)
+                .setSeed(0)
+                .build();
+
+        var response = blockingStub.getVectorStream(vectorsRequest);
 
         assertTrue(response.hasNext());
 

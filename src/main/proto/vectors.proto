@@ -6,7 +6,9 @@ option java_package = "nl.kabisa.rpc.proto.base";
 option java_outer_classname = "VectorProto";
 
 service VectorService {
-    rpc GetVectors(VectorsRequest) returns (stream Vector) {}
+    rpc GetVectorStream(VectorsRequest) returns (stream Vector) {}
+
+    rpc GetVectors(VectorsRequest) returns (Vectors) {}
 }
 
 message VectorsRequest {

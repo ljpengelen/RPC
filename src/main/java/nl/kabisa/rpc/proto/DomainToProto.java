@@ -1,5 +1,7 @@
 package nl.kabisa.rpc.proto;
 
+import java.util.List;
+
 import nl.kabisa.rpc.models.Point;
 import nl.kabisa.rpc.models.Vector;
 import nl.kabisa.rpc.proto.base.VectorProto;
@@ -22,5 +24,12 @@ public class DomainToProto {
                 .setStart(toProto(vector.getStart()))
                 .setEnd(toProto(vector.getEnd()))
                 .build();
+    }
+
+    public static VectorProto.Vectors toProto(List<Vector> vectors) {
+        var vectorsBuilder = VectorProto.Vectors.newBuilder();
+        vectors.forEach(vector -> vectorsBuilder.addVectors(toProto(vector)));
+
+        return vectorsBuilder.build();
     }
 }

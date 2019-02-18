@@ -19,6 +19,19 @@ public class VectorsServiceConsumer {
 
         var response = blockingStub.getVectors(vectorsRequest);
 
+        response.getVectorsList();
+    }
+
+    public void getVectorStream(String hostname, int port, long seed, int numberOfVectors) {
+        var managedChannel = ManagedChannelBuilder.forAddress(hostname, port).usePlaintext().build();
+        var blockingStub = VectorServiceGrpc.newBlockingStub(managedChannel);
+        var vectorsRequest = VectorProto.VectorsRequest.newBuilder()
+                .setNumberOfVectors(numberOfVectors)
+                .setSeed(seed)
+                .build();
+
+        var response = blockingStub.getVectorStream(vectorsRequest);
+
         while (response.hasNext()) {
             response.next();
         }

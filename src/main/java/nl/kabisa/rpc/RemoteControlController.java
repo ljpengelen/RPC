@@ -85,7 +85,7 @@ public class RemoteControlController {
         return new Statistics(hostname, port, numberOfIterations, numberOfVectors, duration);
     }
 
-    @GetMapping("/remote/proto/vectors")
+    @GetMapping("/remote/proto/list/vectors")
     public Statistics getProtoVectors(
             @RequestParam String hostname, @RequestParam int port, @RequestParam int numberOfIterations, @RequestParam long seed, @RequestParam int numberOfVectors) {
 
@@ -93,6 +93,21 @@ public class RemoteControlController {
 
         for (var i = 0; i < numberOfIterations; ++i) {
             vectorsServiceConsumer.getVectors(hostname, port, seed, numberOfVectors);
+        }
+
+        var duration = System.currentTimeMillis() - startTime;
+
+        return new Statistics(hostname, port, numberOfIterations, numberOfVectors, duration);
+    }
+
+    @GetMapping("/remote/proto/stream/vectors")
+    public Statistics getProtoVectorStream(
+            @RequestParam String hostname, @RequestParam int port, @RequestParam int numberOfIterations, @RequestParam long seed, @RequestParam int numberOfVectors) {
+
+        var startTime = System.currentTimeMillis();
+
+        for (var i = 0; i < numberOfIterations; ++i) {
+            vectorsServiceConsumer.getVectorStream(hostname, port, seed, numberOfVectors);
         }
 
         var duration = System.currentTimeMillis() - startTime;
