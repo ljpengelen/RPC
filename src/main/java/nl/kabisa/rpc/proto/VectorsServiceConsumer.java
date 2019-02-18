@@ -20,6 +20,8 @@ public class VectorsServiceConsumer {
         var response = blockingStub.getVectors(vectorsRequest);
 
         response.getVectorsList();
+
+        managedChannel.shutdown();
     }
 
     public void getVectorStream(String hostname, int port, long seed, int numberOfVectors) {
@@ -35,5 +37,7 @@ public class VectorsServiceConsumer {
         while (response.hasNext()) {
             response.next();
         }
+
+        managedChannel.shutdown();
     }
 }
