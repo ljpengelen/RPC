@@ -4,8 +4,11 @@ import java.util.Objects;
 
 public class Vector {
 
-    private final Point start;
-    private final Point end;
+    private Point start;
+    private Point end;
+
+    protected Vector() {
+    }
 
     public Vector(Point start, Point end) {
         this.start = start;
@@ -16,8 +19,16 @@ public class Vector {
         return start;
     }
 
+    protected void setStart(Point start) {
+        this.start = start;
+    }
+
     public Point getEnd() {
         return end;
+    }
+
+    protected void setEnd(Point end) {
+        this.end = end;
     }
 
     @Override

@@ -5,7 +5,10 @@ import java.util.Objects;
 
 public class Vectors {
 
-    private final List<Vector> vectors;
+    private List<Vector> vectors;
+
+    protected Vectors() {
+    }
 
     public Vectors(List<Vector> vectors) {
         this.vectors = vectors;
@@ -13,6 +16,10 @@ public class Vectors {
 
     public List<Vector> getVectors() {
         return this.vectors;
+    }
+
+    protected void setVectors(List<Vector> vectors) {
+        this.vectors = vectors;
     }
 
     @Override

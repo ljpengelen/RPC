@@ -4,9 +4,12 @@ import java.util.Objects;
 
 public class Point {
 
-    private final double x;
-    private final double y;
-    private final double z;
+    private double x;
+    private double y;
+    private double z;
+
+    protected Point() {
+    }
 
     public Point(double x, double y, double z) {
         this.x = x;
@@ -18,12 +21,24 @@ public class Point {
         return x;
     }
 
+    protected void setX(double x) {
+        this.x = x;
+    }
+
     public double getY() {
         return y;
     }
 
+    protected void setY(double y) {
+        this.y = y;
+    }
+
     public double getZ() {
         return z;
+    }
+
+    protected void setZ(double z) {
+        this.z = z;
     }
 
     @Override
