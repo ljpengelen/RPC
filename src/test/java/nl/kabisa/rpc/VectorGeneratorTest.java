@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import nl.kabisa.rpc.VectorGenerator;
 import nl.kabisa.rpc.models.Vector;
 
 public class VectorGeneratorTest {
