@@ -10,11 +10,13 @@ import nl.kabisa.rpc.rest.VectorControllerConsumer;
 public class RemoteControlController {
 
     private final VectorControllerConsumer vectorControllerConsumer;
+    private final VectorGenerator vectorGenerator;
     private final VectorsServiceConsumer vectorsServiceConsumer;
 
     @Autowired
-    public RemoteControlController(VectorControllerConsumer vectorControllerConsumer, VectorsServiceConsumer vectorsServiceConsumer) {
+    public RemoteControlController(VectorControllerConsumer vectorControllerConsumer, VectorGenerator vectorGenerator, VectorsServiceConsumer vectorsServiceConsumer) {
         this.vectorControllerConsumer = vectorControllerConsumer;
+        this.vectorGenerator = vectorGenerator;
         this.vectorsServiceConsumer = vectorsServiceConsumer;
     }
 
@@ -113,5 +115,19 @@ public class RemoteControlController {
         var duration = System.currentTimeMillis() - startTime;
 
         return new Statistics(hostname, port, numberOfIterations, numberOfVectors, duration);
+    }
+
+    @GetMapping("/local/vectors")
+    public Statistics getLocalVectors(@RequestParam int numberOfIterations, @RequestParam long seed, @RequestParam int numberOfVectors) {
+
+        var startTime = System.currentTimeMillis();
+
+        for (var i = 0; i < numberOfIterations; ++i) {
+            vectorGenerator.generateRandomVectors(seed, numberOfVectors);
+        }
+
+        var duration = System.currentTimeMillis() - startTime;
+
+        return new Statistics(null, 0, numberOfIterations, numberOfVectors, duration);
     }
 }
