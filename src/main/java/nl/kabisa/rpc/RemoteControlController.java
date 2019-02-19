@@ -87,8 +87,8 @@ public class RemoteControlController {
         return new Statistics(hostname, port, numberOfIterations, numberOfVectors, duration);
     }
 
-    @GetMapping("/remote/proto/list/vectors")
-    public Statistics getProtoVectors(
+    @GetMapping("/remote/grpc/list/vectors")
+    public Statistics getGrpcVectors(
             @RequestParam String hostname, @RequestParam int port, @RequestParam int numberOfIterations, @RequestParam long seed, @RequestParam int numberOfVectors) {
 
         var startTime = System.currentTimeMillis();
@@ -102,8 +102,8 @@ public class RemoteControlController {
         return new Statistics(hostname, port, numberOfIterations, numberOfVectors, duration);
     }
 
-    @GetMapping("/remote/proto/stream/vectors")
-    public Statistics getProtoVectorStream(
+    @GetMapping("/remote/grpc/stream/vectors")
+    public Statistics getGrpcVectorStream(
             @RequestParam String hostname, @RequestParam int port, @RequestParam int numberOfIterations, @RequestParam long seed, @RequestParam int numberOfVectors) {
 
         var startTime = System.currentTimeMillis();
